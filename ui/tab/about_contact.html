@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TOMATO FOOD DELIVERY</title>
+
+	<!-- Fav Icon -->
+	<link rel="icon" type="image/x-icon" href="../assets/logo/fav.png">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="../assets/external_assets/fontawesome-free-5.13.1-web/css/all.min.css">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../css/tab/ab_ct.css"> 
+
+	<!-- EEL JS -->
+	<script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+
+<div class="top_d">
+	<div class="logo_txt">&nbsp;</div>
+	<div class="tp_btn">
+		<i class="fas fa-home" onclick="gt_op()"></i>&nbsp;
+		<span onclick="dis_hd_log_b()" class="user_op">Hi&nbsp;<span id="t_us_name"></span></span>
+	</div>
+</div>
+
+<h2 class="h2_os">About Us</h2>
+
+<div class="wra_abct">
+	<div class="fo_md">
+		<div class="fo_d">
+			<img src="../assets/fd_img/fd.png" id="fo_img">
+			<div class="fo_na">Vikram Sharma</div>
+			<div class="fo_p">Founder</div>
+		</div>
+		<div class="fo_d">
+			<img src="../assets/fd_img/fd.png" id="fo_img">
+			<div class="fo_na">Adarsh Verma</div>
+			<div class="fo_p">Co-Founder</div>
+		</div>
+	</div>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</p>
+</div>
+
+<h2 class="h2_os h22" id="cot">Contact Us</h2>
+
+<div class="wra_abct">
+	<!-- <h1>Get in Touch</h1> -->
+	<div class="cr_">Phone</div>
+	<div class="va_">1800 123 4567, 1800 987 6543</div>
+	<div class="cr_">Email</div>
+	<div class="va_">tomato352@tfd.com</div>
+	<div class="cr_">WhatsApp</div>
+	<div class="va_">+91 1234567890</div>
+	<div class="cr_">Official Address</div>
+	<div class="va_">DAV PUBLIC SCHOOL SR. SECONDRY Dudhichua Singrauli, Madhya Pradesh</div>
+</div>
+
+
+
+
+<div class="bott_d_">
+
+	<div class="bot_men_b">
+		<a onclick="gt_op()">Home</a>
+		<a href="">About</a>
+		<a href="#cot">Contact</a>
+		<a href="../account/log_sig_p.html">Logout</a>
+	</div>
+	<div class="cr_b">
+		<i class="far fa-copyright"></i> - 2021 - 2022 | 
+		All Rights Reserved | 
+		Made with ❤️ in INDIA 🇮🇳 by VIKRAM & ADARSH
+	</div>
+</div>
+
+<div class="log_b" onclick="window.location = '../account/log_sig_p.html'">Logout</div>
+
+<!-- <h1></h1> -->
+
+<script type="text/javascript">
+
+const log_b = document.querySelector('.log_b'),
+	  wrapper_or = document.querySelector('#wrapper_or');
+	  // onload_click = ;
+
+log_b.style.display = 'none';
+
+function dis_hd_log_b()
+{
+	if (log_b.style.display == 'none') 
+	{
+		log_b.style.display = 'block';
+	}
+	else
+	{
+		log_b.style.display = 'none';
+	}
+	
+}
+
+a_uid = '';
+
+function gt_op()
+{
+	window.location = 'index.html?un='+a_uid;
+}
+
+window.onload=()=>
+{
+	let url = window.location;
+	uid = get_parameter(url);
+	a_uid += uid;
+	get_user_data(uid);
+	get_myorder(uid);
+}
+
+function get_parameter(url)
+{
+	let new_url = new URL(url);
+	para = new_url.searchParams.get('un');
+	console.log(para);
+	return para;
+}
+
+function get_user_data(uid)
+{
+	eel.get_user_data_b_py(uid)(data_f_py);
+	function data_f_py(dat) 
+	{
+		document.querySelector('#t_us_name').innerHTML = dat;
+	}
+}
+</script>
+</body>
+</html>

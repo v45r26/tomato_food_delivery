@@ -1,0 +1,78 @@
+@font-face
+{
+	font-family: helvetica;
+	src: url('../assets/external_assets/G-Fonts/Helvetica.ttf');
+}
+@font-face
+{
+	font-family: JosefinSans;
+	src: url('../assets/external_assets/G-Fonts/JosefinSans-Regular.ttf');
+}
+*
+{
+	outline: none;
+	box-sizing: border-box;
+}
+body
+{
+	background-color: #fff;
+    display: flex;
+    justify-content: center;
+}
+.wrapper
+{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.wrapper .img_b
+{
+	border: 00px solid #000;
+	display: flex;
+	justify-content: center;
+}
+.wrapper .img_b img
+{
+	width: 200px;
+	height: 200px;
+}
+.wrapper .text_b
+{
+	margin: 10px 0 -7px 0;
+	font-family: josefinsans;
+	font-size: 30px;
+	font-weight: 600;
+	display: flex;
+	justify-content: center;
+}
+.wrapper .text_b::before
+{
+	content: 'TOMATO';
+	color: #ef4143;
+}
+.wrapper .text_b::after
+{
+	content: 'FOOD DELIVERY';
+	color: #424242;
+}
+.wrapper .pro_b_b
+{
+	height: 15px;
+	width: 100%;
+	background: #424242;
+	margin: 20px 0 0 0;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.wrapper .pro_b_b .progress_bar
+{
+	background: #ef4143;
+	height: 15px;
+	width: 0%;
+	border-radius: 10px;
+	transition: 0.3s ease;
+}

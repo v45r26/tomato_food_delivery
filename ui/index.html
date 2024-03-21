@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TOMATO FOOD DELIVERY</title>
+
+	<!-- Fav Icon -->
+	<link rel="icon" type="image/x-icon" href="assets/logo/fav.png">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="assets/external_assets/fontawesome-free-5.13.1-web/css/all.min.css">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+
+	<!-- EEL JS -->
+	<script type="text/javascript" src="/eel.js"></script>
+
+	
+</head>
+<body>
+
+<!-- <a href="account/log_sig_p.html">Login</a> -->
+
+<div class="wrapper">
+	<!-- IMG -->
+	<div class="img_b">
+		<img src="assets/logo/main.png">
+	</div>
+	<!-- TEXT -->
+	<div class="text_b">&nbsp;</div>
+	<!-- Progress Bar -->
+	<div class="pro_b_b">
+		<div class="progress_bar" id="progress_bar"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+const pro = document.querySelector('#progress_bar');
+proV = 0;
+
+progInterval = setInterval(
+	()=>
+	{
+		proV++;
+		pro.style.width = proV+'%';
+
+		if (proV >= 115) 
+		{
+			clearInterval(progInterval);
+			window.location = 'account/log_sig_p.html';
+		}
+		// console.log(proV);
+	},30);
+
+</script>
+</body>
+</html>

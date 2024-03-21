@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TOMATO FOOD DELIVERY</title>
+
+	<!-- Fav Icon -->
+	<link rel="icon" type="image/x-icon" href="../assets/logo/fav.png">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="../assets/external_assets/fontawesome-free-5.13.1-web/css/all.min.css">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../css/tab/index.css"> 
+
+	<!-- EEL JS -->
+	<script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+
+<div class="top_d">
+	<div class="logo_txt">&nbsp;</div>
+	<div class="tp_btn">
+		<i class="fas fa-home" onclick="gt_op()"></i>&nbsp;
+		<span onclick="dis_hd_log_b()" class="user_op">Hi&nbsp;<span id="t_us_name"></span></span>
+	</div>
+</div>
+
+<h2 class="h2_os">My Orders</h2>
+
+<div class="wrapper_or" id="wrapper_or">
+
+</div>
+
+
+<div class="bott_d_">
+
+	<div class="bot_men_b">
+		<a onclick="gt_op()">Home</a>
+		<a href="about_contact.html">About</a>
+		<a href="about_contact.html">Contact</a>
+		<a href="../account/log_sig_p.html">Logout</a>
+	</div>
+	<div class="cr_b">
+		<i class="far fa-copyright"></i> - 2021 - 2022 | 
+		All Rights Reserved | 
+		Made with ❤️ in INDIA 🇮🇳 by VIKRAM & ADARSH
+	</div>
+</div>
+
+<div class="log_b" onclick="window.location = '../account/log_sig_p.html'">Logout</div>
+
+<!-- <h1></h1> -->
+
+<script type="text/javascript">
+
+const log_b = document.querySelector('.log_b'),
+	  wrapper_or = document.querySelector('#wrapper_or');
+	  // onload_click = ;
+
+log_b.style.display = 'none';
+
+function dis_hd_log_b()
+{
+	if (log_b.style.display == 'none') 
+	{
+		log_b.style.display = 'block';
+	}
+	else
+	{
+		log_b.style.display = 'none';
+	}
+	
+}
+
+a_uid = '';
+
+function gt_op()
+{
+	window.location = 'index.html?un='+a_uid;
+}
+
+window.onload=()=>
+{
+	let url = window.location;
+	uid = get_parameter(url);
+	a_uid += uid;
+	get_user_data(uid);
+	get_myorder(uid);
+}
+
+function get_parameter(url)
+{
+	let new_url = new URL(url);
+	para = new_url.searchParams.get('un');
+	console.log(para);
+	return para;
+}
+
+function get_user_data(uid)
+{
+	eel.get_user_data_b_py(uid)(data_f_py);
+	function data_f_py(dat) 
+	{
+		document.querySelector('#t_us_name').innerHTML = dat;
+	}
+}
+
+function get_myorder(uid)
+{
+	// alert(uid);
+	eel.get_myorder_f_py(uid)(otpt);
+	function otpt(ret_or_m)
+	{
+		let get_da = ret_or_m;
+		console.log(get_da);
+		wrapper_or.innerHTML = get_da;
+	}
+}
+
+function can_or(oid)
+{
+	eel.can_order_py(oid)();
+	// if (ls == ''success) 
+	// {
+
+	// }
+	// alert(a_uid+' - '+oid);
+	get_myorder(a_uid);
+}
+function res_or(oid)
+{
+	eel.rec_order_py(oid)();
+	// if (ls == ''success) 
+	// {
+
+	// }
+	// alert(a_uid+' - '+oid);
+	get_myorder(a_uid);
+}
+</script>
+</body>
+</html>

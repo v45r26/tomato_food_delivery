@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TOMATO FOOD DELIVERY</title>
+
+	<!-- Fav Icon -->
+	<link rel="icon" type="image/x-icon" href="../assets/logo/fav.png">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="../assets/external_assets/fontawesome-free-5.13.1-web/css/all.min.css">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../css/tab/index.css"> 
+
+	<!-- EEL JS -->
+	<script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+
+<div class="top_d">
+	<div class="logo_txt">&nbsp;</div>
+	<div class="tp_btn">
+		<i class="fas fa-shopping-cart" onclick="gt_op()"></i>&nbsp;
+		<span onclick="dis_hd_log_b()" class="user_op">Hi&nbsp;<span id="t_us_name"></span></span>
+	</div>
+</div>
+
+<div id="myBtnContainer">
+	<button class="fl_btn btn_active" onclick="filterSelection('all')" id="onload_click"> Show all</button>
+	<button class="fl_btn" onclick="filterSelection('soup')">Soup</button>
+	<button class="fl_btn" onclick="filterSelection('pizza')">Pizza</button>
+	<button class="fl_btn" onclick="filterSelection('burger')">Burger</button>
+	<button class="fl_btn" onclick="filterSelection('rolls')">Rolls</button>
+	<button class="fl_btn" onclick="filterSelection('dosa')">Dosa</button>
+	<button class="fl_btn" onclick="filterSelection('veg')">Veg</button>
+	<button class="fl_btn" onclick="filterSelection('nonvg')">Non Veg</button>
+	<button class="fl_btn" onclick="filterSelection('indian')">Indian</button>
+</div>
+
+<br>
+<br>
+
+
+<div class="wrapper row" id="wrapper">
+
+<!-- 	<div class="column cars">
+    	<div class="content">
+    		<img src="../assets/images/mt.jpg" alt="Car" class="img_d">
+      		<div class="dis_prc">$ 20</div>
+      		<div class="dis_na">Mashroom Soup</div>
+      		<button class="odr_btn_c" onclick="set_order('uid','food_ic')">Buy</button>
+    	</div>
+	</div> -->	 	 
+</div>
+
+<div class="bott_d_">
+
+	<div class="bot_men_b">
+		<a onclick="gt_op()">MyCart</a>
+		<a onclick="gt_abp()">About</a>
+		<a onclick="gt_ctp()">Contact</a>
+		<a href="../account/log_sig_p.html">Logout</a>
+	</div>
+	<div class="cr_b">
+		<i class="far fa-copyright"></i> - 2021 - 2022 | 
+		All Rights Reserved | 
+		Made with ❤️ in INDIA 🇮🇳 by VIKRAM & ADARSH
+	</div>
+</div>
+
+
+<div class="log_b" onclick="window.location = '../account/log_sig_p.html'">Logout</div>
+
+<!-- <h1></h1> -->
+
+<script type="text/javascript">
+
+const log_b = document.querySelector('.log_b'),
+	  wrapper = document.querySelector('#wrapper');
+
+log_b.style.display = 'none';
+
+function dis_hd_log_b()
+{
+	if (log_b.style.display == 'none') 
+	{
+		log_b.style.display = 'block';
+	}
+	else
+	{
+		log_b.style.display = 'none';
+	}
+	
+}
+
+a_uid = '';
+
+function gt_op()
+{
+	window.location = 'myorder.html?un='+a_uid;
+}
+function gt_abp()
+{
+	window.location = 'about_contact.html?un='+a_uid;
+}
+function gt_ctp()
+{
+	window.location = 'about_contact.html?un='+a_uid+'#cot';
+}
+
+window.onload = ()=>
+{
+	let url = window.location;
+	// get_parameter(url);
+	uid = get_parameter(url);
+	a_uid += uid;
+	get_user_data(uid);
+	get_fd_data(uid);
+	document.querySelector('#onload_click').click();
+}
+
+function get_parameter(url)
+{
+	let new_url = new URL(url);
+	para = new_url.searchParams.get('un');
+	console.log(para);
+	return para;
+}
+
+function get_user_data(uid)
+{
+	eel.get_user_data_b_py(uid)(data_f_py);
+	function data_f_py(dat) 
+	{
+		document.querySelector('#t_us_name').innerHTML = dat;
+	}
+}
+
+function get_fd_data(uid) 
+{
+	eel.get_fd_data_b_py(uid)(otpt);
+	function otpt(ret_dat_b)
+	{
+		let get_da = ret_dat_b;
+		console.log(get_da);
+		wrapper.innerHTML = get_da;
+	}
+	// onload_click.click();
+}
+
+function set_order(uid,f_id)
+{
+	console.log(uid,f_id)
+	eel.set_order_py(uid,f_id)(order_stat);
+	function order_stat(ret_val) 
+	{
+		let data = ret_val;
+		if (data = 'success') 
+		{
+			alert('SUCCESS!');
+		}
+		else
+		{
+			alert('Something Went Wrong!');
+		}
+	}
+}
+
+// Click show all btn 1 sec after loading the page
+setTimeout(() => 
+{  
+	filterSelection("all"); 
+}, 1000);
+
+
+</script>
+
+<script type="text/javascript">
+// filterSelection("all");
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("column");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("fl_btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("btn_active");
+    current[0].className = current[0].className.replace(" btn_active", "");
+    this.className += " btn_active";
+  });
+}
+</script>
+</body>
+</html>
